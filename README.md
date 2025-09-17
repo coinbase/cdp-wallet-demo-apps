@@ -1,6 +1,10 @@
 # React Native Expo Example
 
-A React Native Expo example demonstrating CDP Embedded Wallet SDK integration with React Native hooks.
+A React Native Expo example demonstrating CDP Embedded Wallet SDK integration with React Native hooks. This app was generated via `pnpm create @coinbase/cdp-app@latest`. See the [CDP React Native Quickstart](https://docs.cdp.coinbase.com/embedded-wallets/react-native/quickstart) for more details.
+
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/0c04d44c-f1d5-441a-b752-104022af2f19" />
+</p>
 
 ## Prerequisites
 
@@ -16,8 +20,8 @@ A React Native Expo example demonstrating CDP Embedded Wallet SDK integration wi
 
 1. Install [Xcode](https://developer.apple.com/xcode/).
 2. On initial load, Xcode will ask which platforms you want to install. Select the iOS platform.
-    - a. If you missed it on initial load, then open Xcode → Preferences → Components.
-    - b. Install the iOS simulator version you want to test
+   - a. If you missed it on initial load, then open Xcode → Preferences → Components.
+   - b. Install the iOS simulator version you want to test
 3. Expo will automatically start the simulator when you run the app.
 
 #### Android Emulator
@@ -33,11 +37,13 @@ A React Native Expo example demonstrating CDP Embedded Wallet SDK integration wi
 ### Setting up the app
 
 1. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 2. Copy environment variables:
+
    ```bash
    cp .env.example .env
    ```
@@ -47,11 +53,13 @@ A React Native Expo example demonstrating CDP Embedded Wallet SDK integration wi
 ## Running the App
 
 **iOS:**
+
 ```bash
 pnpm run ios
 ```
 
 **Android:**
+
 ```bash
 pnpm run android
 ```

@@ -13,7 +13,6 @@ import {
 import {
   createPublicClient,
   http,
-  formatEther,
   parseUnits,
   encodeFunctionData,
   formatUnits,
@@ -23,6 +22,9 @@ import { useTheme } from "./theme/ThemeContext";
 
 // USDC contract address on Base Sepolia
 const USDC_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e" as const;
+
+// Faucet contract address on Base Sepolia
+const FAUCET_ADDRESS = "0x8fDDcc0c5C993A1968B46787919Cc34577d6dC5c" as const;
 
 // ERC20 ABI for balance and transfer
 const ERC20_ABI = [
@@ -72,11 +74,6 @@ function SmartAccountTransaction(props: Props) {
 
   const smartAccount = currentUser?.evmSmartAccounts?.[0];
 
-  const formattedBalance = useMemo(() => {
-    if (balance === undefined) return undefined;
-    return formatEther(balance);
-  }, [balance]);
-
   const formattedUsdcBalance = useMemo(() => {
     if (usdcBalance === undefined) return undefined;
     return formatUnits(usdcBalance, 6); // USDC has 6 decimals
@@ -120,13 +117,13 @@ function SmartAccountTransaction(props: Props) {
     setErrorMessage("");
 
     try {
-      // Send 1 USDC to self as an example
+      // Send 1 USDC back to the faucet
       const usdcAmount = parseUnits("1", 6); // USDC has 6 decimals
 
       const transferData = encodeFunctionData({
         abi: ERC20_ABI,
         functionName: "transfer",
-        args: [smartAccount, usdcAmount],
+        args: [FAUCET_ADDRESS, usdcAmount],
       });
 
       const result = await sendUserOperation({
@@ -146,9 +143,13 @@ function SmartAccountTransaction(props: Props) {
         getBalance();
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to send user operation";
+      const message =
+        err instanceof Error ? err.message : "Failed to send user operation";
       setErrorMessage(message);
-      Alert.alert("Transaction Failed", message + (message.endsWith(".") ? "" : "."));
+      Alert.alert(
+        "Transaction Failed",
+        message + (message.endsWith(".") ? "" : ".")
+      );
     }
   };
 
@@ -185,11 +186,10 @@ function SmartAccountTransaction(props: Props) {
           style: "cancel",
         },
       ],
-      { cancelable: true },
+      { cancelable: true }
     );
   };
 
-  const hasBalance = balance && balance > 0n; // Still check ETH for gas
   const hasUsdcBalance = usdcBalance && usdcBalance > 0n;
 
   const createStyles = () =>
@@ -365,7 +365,9 @@ function SmartAccountTransaction(props: Props) {
       <View style={styles.balanceSection}>
         <Text style={styles.balanceTitle}>Current Balance</Text>
         <Text style={styles.balanceAmount}>
-          {formattedUsdcBalance === undefined ? "Loading..." : `${formattedUsdcBalance} USDC`}
+          {formattedUsdcBalance === undefined
+            ? "Loading..."
+            : `${formattedUsdcBalance} USDC`}
         </Text>
         {!hasUsdcBalance && (
           <TouchableOpacity style={styles.faucetButton} onPress={openFaucet}>
@@ -378,7 +380,11 @@ function SmartAccountTransaction(props: Props) {
       <View style={styles.transactionSection}>
         <Text style={styles.sectionTitle}>Transfer 1 USDC</Text>
         <Text style={styles.sectionSubtitle}>
-          This example transaction sends 1 USDC from your wallet to itself.
+          This example sends 1 USDC from your wallet to the{" "}
+          <Text style={styles.faucetLink} onPress={openFaucet}>
+            CDP Faucet
+          </Text>
+          .
         </Text>
 
         {!hasUsdcBalance && (
@@ -387,8 +393,8 @@ function SmartAccountTransaction(props: Props) {
             <View style={styles.noteTextContainer}>
               <Text style={styles.noteTitle}>Note:</Text>
               <Text style={styles.noteText}>
-                Even though this is a gasless transaction, you still need USDC in your account to
-                send it. Get some from the{" "}
+                Even though this is a gasless transaction, you still need USDC
+                in your account to send it. Get some from the{" "}
                 <Text style={styles.faucetLink} onPress={openFaucet}>
                   CDP Faucet
                 </Text>
@@ -401,7 +407,8 @@ function SmartAccountTransaction(props: Props) {
         <TouchableOpacity
           style={[
             styles.sendButton,
-            (!smartAccount || isLoading || !hasUsdcBalance) && styles.sendButtonDisabled,
+            (!smartAccount || isLoading || !hasUsdcBalance) &&
+              styles.sendButtonDisabled,
           ]}
           onPress={handleSendUserOperation}
           disabled={!smartAccount || isLoading || !hasUsdcBalance}
@@ -415,7 +422,9 @@ function SmartAccountTransaction(props: Props) {
 
         {errorMessage || error ? (
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>{errorMessage || error?.message}</Text>
+            <Text style={styles.errorText}>
+              {errorMessage || error?.message}
+            </Text>
           </View>
         ) : null}
 
@@ -430,12 +439,14 @@ function SmartAccountTransaction(props: Props) {
                 onPress={() =>
                   copyToClipboard(
                     `https://sepolia.basescan.org/tx/${data.transactionHash}`,
-                    "Block Explorer Link",
+                    "Block Explorer Link"
                   )
                 }
               >
                 <Text style={styles.hashText}>{data.transactionHash}</Text>
-                <Text style={styles.copyHint}>Tap to copy block explorer link</Text>
+                <Text style={styles.copyHint}>
+                  Tap to copy block explorer link
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
