@@ -1,6 +1,5 @@
 import {
   CDPHooksProvider,
-  useConfig,
   useIsInitialized,
   useSignInWithEmail,
   useVerifyEmailOTP,
@@ -8,7 +7,6 @@ import {
   useVerifySmsOTP,
   useIsSignedIn,
   useSignOut,
-  useCurrentUser,
   Config,
 } from "@coinbase/cdp-hooks";
 import { StatusBar } from "expo-status-bar";
@@ -21,14 +19,11 @@ import {
   Alert,
   ScrollView,
   SafeAreaView,
-  Animated,
-  Dimensions,
 } from "react-native";
 
 import Transaction from "./Transaction";
 import { ThemeProvider, useTheme } from "./theme/ThemeContext";
-import { WelcomeScreen } from "./components/WelcomeScreen";
-import { SignInModal } from "./components/SignInModal";
+import { SignInForm } from "./components/SignInForm";
 import { DarkModeToggle } from "./components/DarkModeToggle";
 import { WalletHeader } from "./components/WalletHeader";
 import { AuthMethod } from "./types";
@@ -66,9 +61,7 @@ function CDPApp() {
   const { signInWithSms } = useSignInWithSms();
   const { verifySmsOTP } = useVerifySmsOTP();
   const { signOut } = useSignOut();
-  const { config } = useConfig();
   const { colors, isDarkMode } = useTheme();
-  const { currentUser } = useCurrentUser();
 
   const [authMethod, setAuthMethod] = useState<AuthMethod>("email");
   const [email, setEmail] = useState("");
@@ -76,8 +69,6 @@ function CDPApp() {
   const [otp, setOtp] = useState("");
   const [flowId, setFlowId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [showSignInModal, setShowSignInModal] = useState(false);
-  const [slideAnim] = useState(new Animated.Value(Dimensions.get("window").height));
 
   const handleSignIn = async () => {
     if (authMethod === "email") {
@@ -132,7 +123,6 @@ function CDPApp() {
       }
       setOtp("");
       setFlowId("");
-      closeSignInModal();
     } catch (error) {
       Alert.alert("Error", error instanceof Error ? error.message : "Failed to verify OTP.");
     } finally {
@@ -156,31 +146,11 @@ function CDPApp() {
     setAuthMethod(authMethod === "email" ? "sms" : "email");
     setEmail("");
     setPhoneNumber("");
-    setOtp("");
+  };
+
+  const handleBack = () => {
     setFlowId("");
-  };
-
-  const openSignInModal = () => {
-    setShowSignInModal(true);
-    Animated.timing(slideAnim, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const closeSignInModal = () => {
-    Animated.timing(slideAnim, {
-      toValue: Dimensions.get("window").height,
-      duration: 300,
-      useNativeDriver: true,
-    }).start(() => {
-      setShowSignInModal(false);
-      setEmail("");
-      setPhoneNumber("");
-      setOtp("");
-      setFlowId("");
-    });
+    setOtp("");
   };
 
   const createStyles = () =>
@@ -266,7 +236,21 @@ function CDPApp() {
 
       <View style={styles.content}>
         {!isSignedIn ? (
-          <WelcomeScreen onSignInPress={openSignInModal} />
+          <SignInForm
+            authMethod={authMethod}
+            onAuthMethodToggle={handleAuthMethodToggle}
+            email={email}
+            setEmail={setEmail}
+            phoneNumber={phoneNumber}
+            setPhoneNumber={setPhoneNumber}
+            otp={otp}
+            setOtp={setOtp}
+            flowId={flowId}
+            isLoading={isLoading}
+            onSignIn={handleSignIn}
+            onVerifyOTP={handleVerifyOTP}
+            onBack={handleBack}
+          />
         ) : (
           <>
             <WalletHeader onSignOut={handleSignOut} />
@@ -283,24 +267,6 @@ function CDPApp() {
         )}
       </View>
 
-      <SignInModal
-        visible={showSignInModal}
-        onClose={closeSignInModal}
-        authMethod={authMethod}
-        onAuthMethodToggle={handleAuthMethodToggle}
-        email={email}
-        setEmail={setEmail}
-        phoneNumber={phoneNumber}
-        setPhoneNumber={setPhoneNumber}
-        otp={otp}
-        setOtp={setOtp}
-        flowId={flowId}
-        isLoading={isLoading}
-        onSignIn={handleSignIn}
-        onVerifyOTP={handleVerifyOTP}
-        slideAnim={slideAnim}
-      />
-
       <StatusBar style={isDarkMode ? "light" : "dark"} />
     </SafeAreaView>
   );
@@ -312,6 +278,30 @@ function CDPApp() {
  * @returns {JSX.Element} The rendered main component
  */
 export default function App() {
+  // Check if project ID is empty or the placeholder value
+  const projectId = process.env.EXPO_PUBLIC_CDP_PROJECT_ID;
+  const isPlaceholderProjectId = !projectId || projectId === 'your-project-id-here';
+
+  if (isPlaceholderProjectId) {
+    return (
+      <ThemeProvider>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#f5f5f5', justifyContent: 'center', alignItems: 'center', padding: 20 }}>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#333', textAlign: 'center', marginBottom: 16 }}>
+            ⚠️ CDP Project ID Required
+          </Text>
+          <Text style={{ fontSize: 16, color: '#666', textAlign: 'center', lineHeight: 24, marginBottom: 24 }}>
+            Please configure your CDP project ID in the .env file. Create a .env file in the project root and add your CDP project ID.
+          </Text>
+          <View style={{ backgroundColor: '#f0f0f0', padding: 16, borderRadius: 8, borderWidth: 1, borderColor: '#ddd' }}>
+            <Text style={{ fontFamily: 'monospace', fontSize: 14, color: '#333', textAlign: 'center' }}>
+              EXPO_PUBLIC_CDP_PROJECT_ID=your-actual-project-id
+            </Text>
+          </View>
+        </SafeAreaView>
+      </ThemeProvider>
+    );
+  }
+
   return (
     <CDPHooksProvider config={cdpConfig}>
       <ThemeProvider>
