@@ -1,4 +1,4 @@
-package com.anonymous.reactnativeexpo
+package com.cdp.demoreactnativeexpo
 
 import android.os.Build
 import android.os.Bundle

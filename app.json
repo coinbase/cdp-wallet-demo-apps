@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.reactnativeexpo"
+      "bundleIdentifier": "com.cdp.demoreactnativeexpo"
     },
     "android": {
       "adaptiveIcon": {
@@ -22,7 +22,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.reactnativeexpo"
+      "package": "com.cdp.demoreactnativeexpo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
