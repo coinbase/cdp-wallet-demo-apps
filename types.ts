@@ -19,27 +19,6 @@ export interface ThemeContextType {
 
 export type AuthMethod = "email" | "sms";
 
-export interface SignInModalProps {
-  visible: boolean;
-  onClose: () => void;
-  authMethod: AuthMethod;
-  onAuthMethodToggle: () => void;
-  email: string;
-  setEmail: (email: string) => void;
-  phoneNumber: string;
-  setPhoneNumber: (phoneNumber: string) => void;
-  otp: string;
-  setOtp: (otp: string) => void;
-  flowId: string;
-  isLoading: boolean;
-  onSignIn: () => void;
-  onVerifyOTP: () => void;
-  slideAnim: any;
-}
-
-export interface WelcomeScreenProps {
-  onSignInPress: () => void;
-}
 
 export interface DarkModeToggleProps {
   style?: any;
