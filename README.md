@@ -48,7 +48,14 @@ A React Native Expo example demonstrating CDP Embedded Wallet SDK integration wi
    cp .env.example .env
    ```
 
-3. Fill in your CDP API credentials in `.env`.
+3. Update configuration in `.env`.
+
+Fetch your projectID from [CDP Portal](https://portal.cdp.coinbase.com/).
+
+```bash
+   EXPO_PUBLIC_CDP_PROJECT_ID='project-id-here'
+   EXPO_PUBLIC_CDP_CREATE_ACCOUNT_TYPE=evm-smart # change to evm-eoa if you want an EOA address.
+````
 
 ## Running the App
 
