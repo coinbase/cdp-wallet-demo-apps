@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.cdp.demoreactnativeexpo"
+      "bundleIdentifier": "com.cdp.reactnativedemo"
     },
     "android": {
       "adaptiveIcon": {
@@ -22,7 +22,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.cdp.demoreactnativeexpo"
+      "package": "com.cdp.reactnativedemo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,8 +30,6 @@
     "experiments": {
       "reactCanary": true
     },
-    "plugins": [
-      "expo-secure-store"
-    ]
+    "plugins": ["expo-secure-store"]
   }
 }

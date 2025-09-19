@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.cdp.demoreactnativeexpo</string>
+          <string>com.cdp.reactnativedemo</string>
         </array>
       </dict>
     </array>

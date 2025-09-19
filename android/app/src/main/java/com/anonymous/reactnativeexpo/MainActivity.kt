@@ -1,4 +1,4 @@
-package com.cdp.demoreactnativeexpo
+package com.cdp.reactnativedemo
 
 import android.os.Build
 import android.os.Bundle
