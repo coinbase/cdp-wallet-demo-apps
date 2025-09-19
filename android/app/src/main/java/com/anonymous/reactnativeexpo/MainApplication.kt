@@ -1,4 +1,4 @@
-package com.cdp.demoreactnativeexpo
+package com.cdp.reactnativedemo
 
 import android.app.Application
 import android.content.res.Configuration
