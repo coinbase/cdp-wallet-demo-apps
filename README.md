@@ -3,7 +3,7 @@
 A React Native Expo example demonstrating CDP Embedded Wallet SDK integration with React Native hooks. This app was generated via `pnpm create @coinbase/cdp-app@latest`. See the [CDP React Native Quickstart](https://docs.cdp.coinbase.com/embedded-wallets/react-native/quickstart) for more details.
 
 <p align="center">
-   <img src="https://github.com/user-attachments/assets/c2d3b37a-e358-4113-a11f-b90491fb5b74" />
+   <video src="https://github.com/user-attachments/assets/c2d3b37a-e358-4113-a11f-b90491fb5b74" />
 </p>
 
 ## Prerequisites
