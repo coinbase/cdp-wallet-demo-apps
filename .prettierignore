@@ -1,0 +1,4 @@
+ios/
+android/
+pnpm-lock.yaml
+*.md

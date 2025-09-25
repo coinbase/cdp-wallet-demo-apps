@@ -11,15 +11,7 @@ import {
 } from "@coinbase/cdp-hooks";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Alert,
-  ScrollView,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, Text, View, Alert, ScrollView, SafeAreaView } from "react-native";
 
 import Transaction from "./Transaction";
 import { ThemeProvider, useTheme } from "./theme/ThemeContext";
@@ -30,9 +22,9 @@ import { AuthMethod } from "./types";
 
 const cdpConfig: Config = {
   projectId: process.env.EXPO_PUBLIC_CDP_PROJECT_ID,
-  basePath: process.env.EXPO_PUBLIC_CDP_BASE_PATH,
-  createAccountOnLogin: process.env.EXPO_PUBLIC_CDP_CREATE_ACCOUNT_TYPE,
-  useMock: process.env.EXPO_PUBLIC_CDP_USE_MOCK === "true",
+  ethereum: {
+    createOnLogin: "smart",
+  },
 };
 
 /**
@@ -280,20 +272,55 @@ function CDPApp() {
 export default function App() {
   // Check if project ID is empty or the placeholder value
   const projectId = process.env.EXPO_PUBLIC_CDP_PROJECT_ID;
-  const isPlaceholderProjectId = !projectId || projectId === 'your-project-id-here';
+  const isPlaceholderProjectId = !projectId || projectId === "your-project-id-here";
 
   if (isPlaceholderProjectId) {
     return (
       <ThemeProvider>
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#f5f5f5', justifyContent: 'center', alignItems: 'center', padding: 20 }}>
-          <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#333', textAlign: 'center', marginBottom: 16 }}>
+        <SafeAreaView
+          style={{
+            flex: 1,
+            backgroundColor: "#f5f5f5",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 20,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 24,
+              fontWeight: "bold",
+              color: "#333",
+              textAlign: "center",
+              marginBottom: 16,
+            }}
+          >
             ⚠️ CDP Project ID Required
           </Text>
-          <Text style={{ fontSize: 16, color: '#666', textAlign: 'center', lineHeight: 24, marginBottom: 24 }}>
-            Please configure your CDP project ID in the .env file. Create a .env file in the project root and add your CDP project ID.
+          <Text
+            style={{
+              fontSize: 16,
+              color: "#666",
+              textAlign: "center",
+              lineHeight: 24,
+              marginBottom: 24,
+            }}
+          >
+            Please configure your CDP project ID in the .env file. Create a .env file in the project
+            root and add your CDP project ID.
           </Text>
-          <View style={{ backgroundColor: '#f0f0f0', padding: 16, borderRadius: 8, borderWidth: 1, borderColor: '#ddd' }}>
-            <Text style={{ fontFamily: 'monospace', fontSize: 14, color: '#333', textAlign: 'center' }}>
+          <View
+            style={{
+              backgroundColor: "#f0f0f0",
+              padding: 16,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: "#ddd",
+            }}
+          >
+            <Text
+              style={{ fontFamily: "monospace", fontSize: 14, color: "#333", textAlign: "center" }}
+            >
               EXPO_PUBLIC_CDP_PROJECT_ID=your-actual-project-id
             </Text>
           </View>

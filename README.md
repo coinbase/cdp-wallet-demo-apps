@@ -8,33 +8,15 @@ A React Native Expo example demonstrating CDP Embedded Wallet SDK integration wi
 
 ## Prerequisites
 
-- Node.js 20+ and pnpm.
-- For iOS: Xcode and iOS Simulator.
-- For Android: Android Studio and Android emulator.
+You will need Node.js v20 or higher and pnpm installed on your machine.
 
-## Setup
+This project uses development builds via Expo's [Continuous Native Generation](https://docs.expo.dev/workflow/continuous-native-generation/) feature. To learn how to set up your environment, check out Expo's [environment setup guide](https://docs.expo.dev/get-started/set-up-your-environment/?mode=development-build&buildEnv=local).
 
-### Setting up Simulators
+> [!NOTE]
+>
+> The link to the environment setup guide is pre-filled with the correct mode ("Development build") and build environment (disabled "Build with Expo Application Services (EAS)"). Feel free to change the device type / platform but make sure to keep the mode and build environment as-is.
 
-#### iOS Simulator
-
-1. Install [Xcode](https://developer.apple.com/xcode/).
-2. On initial load, Xcode will ask which platforms you want to install. Select the iOS platform.
-   - a. If you missed it on initial load, then open Xcode → Preferences → Components.
-   - b. Install the iOS simulator version you want to test
-3. Expo will automatically start the simulator when you run the app.
-
-#### Android Emulator
-
-1. Install Android Studio.
-2. Open Android Studio → AVD Manager.
-3. Create a new virtual device:
-   - Choose a device definition (e.g., Pixel 7).
-   - Select a system image (API level 30+).
-   - Configure settings and finish.
-4. Expo will automatically start the emulator when you run the app.
-
-### Setting up the app
+## Setting up the app
 
 1. Install dependencies:
 
@@ -48,25 +30,30 @@ A React Native Expo example demonstrating CDP Embedded Wallet SDK integration wi
    cp .env.example .env
    ```
 
-3. Update configuration in `.env`.
+3. Fetch your Proejct ID from [CDP Portal](https://portal.cdp.coinbase.com/) and update `EXPO_PUBLIC_CDP_PROJECT_ID` in `.env`.
 
-Fetch your projectID from [CDP Portal](https://portal.cdp.coinbase.com/).
-
-```bash
-   EXPO_PUBLIC_CDP_PROJECT_ID='project-id-here'
-   EXPO_PUBLIC_CDP_CREATE_ACCOUNT_TYPE=evm-smart # change to evm-eoa if you want an EOA address.
-````
+   ```bash
+   EXPO_PUBLIC_CDP_PROJECT_ID='your-project-id-here'
+   ```
 
 ## Running the App
 
 **iOS:**
 
 ```bash
+# Run on device
+pnpm run ios --device
+
+# Or run on simulator
 pnpm run ios
 ```
 
 **Android:**
 
 ```bash
+# Run on device
+pnpm run android --device
+
+# Or run on emulator
 pnpm run android
 ```

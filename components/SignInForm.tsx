@@ -48,7 +48,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({
   const { colors } = useTheme();
   const scrollViewRef = useRef<ScrollView>(null);
 
-  const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+  const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
   const isSmallScreen = screenHeight < 700;
 
   // Auto-scroll to ensure OTP field and button are visible
@@ -56,9 +56,9 @@ export const SignInForm: React.FC<SignInFormProps> = ({
     if (flowId && scrollViewRef.current) {
       // Initial scroll when OTP field appears
       setTimeout(() => {
-        scrollViewRef.current?.scrollTo({ 
+        scrollViewRef.current?.scrollTo({
           y: 200, // Scroll up enough to show both OTP field and button
-          animated: true 
+          animated: true,
         });
       }, 300);
     }
@@ -66,23 +66,23 @@ export const SignInForm: React.FC<SignInFormProps> = ({
 
   // Handle keyboard events for better positioning
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+    const keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", () => {
       if (flowId && scrollViewRef.current) {
         setTimeout(() => {
-          scrollViewRef.current?.scrollTo({ 
+          scrollViewRef.current?.scrollTo({
             y: 250, // Scroll up more when keyboard is visible
-            animated: true 
+            animated: true,
           });
         }, 100);
       }
     });
 
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+    const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () => {
       if (flowId && scrollViewRef.current) {
         setTimeout(() => {
-          scrollViewRef.current?.scrollTo({ 
+          scrollViewRef.current?.scrollTo({
             y: 150, // Scroll back down a bit when keyboard hides
-            animated: true 
+            animated: true,
           });
         }, 100);
       }
@@ -101,11 +101,11 @@ export const SignInForm: React.FC<SignInFormProps> = ({
       },
       scrollContainer: {
         flexGrow: 1,
-        justifyContent: 'center',
+        justifyContent: "center",
         paddingHorizontal: 20,
         paddingVertical: isSmallScreen ? 20 : 40,
-        paddingBottom: flowId ? (isSmallScreen ? 150 : 180) : (isSmallScreen ? 20 : 40),
-        minHeight: screenHeight - (Platform.OS === 'ios' ? 100 : 80),
+        paddingBottom: flowId ? (isSmallScreen ? 150 : 180) : isSmallScreen ? 20 : 40,
+        minHeight: screenHeight - (Platform.OS === "ios" ? 100 : 80),
       },
       container: {
         alignItems: "center",
@@ -130,10 +130,10 @@ export const SignInForm: React.FC<SignInFormProps> = ({
       header: {
         alignItems: "center",
         marginBottom: isSmallScreen ? 24 : 32,
-        position: 'relative',
+        position: "relative",
       },
       backButton: {
-        position: 'absolute',
+        position: "absolute",
         left: 0,
         top: 0,
         width: 40,
@@ -142,13 +142,13 @@ export const SignInForm: React.FC<SignInFormProps> = ({
         backgroundColor: colors.inputBackground,
         borderWidth: 1,
         borderColor: colors.border,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
       },
       backButtonText: {
         fontSize: 18,
         color: colors.text,
-        fontWeight: '600',
+        fontWeight: "600",
       },
       logoCircle: {
         width: isSmallScreen ? 56 : 64,
@@ -185,11 +185,11 @@ export const SignInForm: React.FC<SignInFormProps> = ({
         borderWidth: 1,
         borderColor: colors.border,
         paddingHorizontal: 16,
-        paddingVertical: Platform.OS === 'ios' ? 16 : 14,
+        paddingVertical: Platform.OS === "ios" ? 16 : 14,
         fontSize: 16,
         color: colors.text,
         marginBottom: isSmallScreen ? 20 : 24,
-        minHeight: Platform.OS === 'android' ? 48 : 44,
+        minHeight: Platform.OS === "android" ? 48 : 44,
       },
       inputDisabled: {
         opacity: 0.6,
@@ -204,14 +204,14 @@ export const SignInForm: React.FC<SignInFormProps> = ({
         flexDirection: "row",
         alignItems: "center",
         paddingHorizontal: 12,
-        paddingVertical: Platform.OS === 'ios' ? 16 : 14,
+        paddingVertical: Platform.OS === "ios" ? 16 : 14,
         borderWidth: 1,
         borderColor: colors.border,
         borderTopLeftRadius: 8,
         borderBottomLeftRadius: 8,
         backgroundColor: colors.inputBackground,
-        minHeight: Platform.OS === 'android' ? 48 : 44,
-        justifyContent: 'center',
+        minHeight: Platform.OS === "android" ? 48 : 44,
+        justifyContent: "center",
       },
       flagText: {
         fontSize: 16,
@@ -231,11 +231,11 @@ export const SignInForm: React.FC<SignInFormProps> = ({
         borderLeftWidth: 0,
         borderColor: colors.border,
         paddingHorizontal: 16,
-        paddingVertical: Platform.OS === 'ios' ? 16 : 14,
+        paddingVertical: Platform.OS === "ios" ? 16 : 14,
         fontSize: 16,
         color: colors.text,
         flex: 1,
-        minHeight: Platform.OS === 'android' ? 48 : 44,
+        minHeight: Platform.OS === "android" ? 48 : 44,
       },
       continueButton: {
         backgroundColor: colors.accent,
@@ -244,7 +244,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({
         alignItems: "center",
         marginBottom: isSmallScreen ? 20 : 24,
         minHeight: 48,
-        justifyContent: 'center',
+        justifyContent: "center",
       },
       continueButtonText: {
         color: "#ffffff",
@@ -393,10 +393,13 @@ export const SignInForm: React.FC<SignInFormProps> = ({
                 disabled={isLoading}
               >
                 <Text style={styles.continueButtonText}>
-                  {isLoading 
-                    ? (flowId ? "Verifying..." : "Sending...") 
-                    : (flowId ? "Verify Code" : "Continue")
-                  }
+                  {isLoading
+                    ? flowId
+                      ? "Verifying..."
+                      : "Sending..."
+                    : flowId
+                      ? "Verify Code"
+                      : "Continue"}
                 </Text>
               </TouchableOpacity>
 
