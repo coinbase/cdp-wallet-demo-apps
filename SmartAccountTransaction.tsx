@@ -13,6 +13,7 @@ import {
 import { createPublicClient, http, parseUnits, encodeFunctionData, formatUnits } from "viem";
 import { baseSepolia } from "viem/chains";
 import { useTheme } from "./theme/ThemeContext";
+import { useBalance, useReadContract } from "wagmi";
 
 // USDC contract address on Base Sepolia
 const USDC_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e" as const;
@@ -67,6 +68,17 @@ function SmartAccountTransaction(props: Props) {
   const { colors } = useTheme();
 
   const smartAccount = currentUser?.evmSmartAccounts?.[0];
+
+  const { data: usdcBalanceData } = useReadContract({
+    abi: ERC20_ABI,
+    functionName: "balanceOf",
+    address: USDC_ADDRESS,
+    args: [smartAccount as `0x${string}`],
+    query: {
+      enabled: !!smartAccount,
+    },
+  });
+  console.log(usdcBalanceData);
 
   const formattedUsdcBalance = useMemo(() => {
     if (usdcBalance === undefined) return undefined;

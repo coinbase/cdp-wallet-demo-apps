@@ -7,7 +7,6 @@ import {
   useVerifySmsOTP,
   useIsSignedIn,
   useSignOut,
-  Config,
 } from "@coinbase/cdp-hooks";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
@@ -20,12 +19,9 @@ import { DarkModeToggle } from "./components/DarkModeToggle";
 import { WalletHeader } from "./components/WalletHeader";
 import { AuthMethod } from "./types";
 
-const cdpConfig: Config = {
-  projectId: process.env.EXPO_PUBLIC_CDP_PROJECT_ID,
-  ethereum: {
-    createOnLogin: "smart",
-  },
-};
+import { WagmiProvider } from "wagmi";
+import { cdpConfig, queryClient, wagmiConfig, persister } from "./config";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 
 /**
  * A multi-step authentication component that handles email and SMS-based sign-in flows.
@@ -90,7 +86,9 @@ function CDPApp() {
         const formattedPhoneNumber = phoneNumber.startsWith("+")
           ? phoneNumber
           : `+1${phoneNumber.replace(/\D/g, "")}`;
-        const result = await signInWithSms({ phoneNumber: formattedPhoneNumber });
+        const result = await signInWithSms({
+          phoneNumber: formattedPhoneNumber,
+        });
         setFlowId(result.flowId);
       } catch (error) {
         Alert.alert("Error", error instanceof Error ? error.message : "Failed to sign in.");
@@ -319,7 +317,12 @@ export default function App() {
             }}
           >
             <Text
-              style={{ fontFamily: "monospace", fontSize: 14, color: "#333", textAlign: "center" }}
+              style={{
+                fontFamily: "monospace",
+                fontSize: 14,
+                color: "#333",
+                textAlign: "center",
+              }}
             >
               EXPO_PUBLIC_CDP_PROJECT_ID=your-actual-project-id
             </Text>
@@ -330,10 +333,14 @@ export default function App() {
   }
 
   return (
-    <CDPHooksProvider config={cdpConfig}>
-      <ThemeProvider>
-        <CDPApp />
-      </ThemeProvider>
-    </CDPHooksProvider>
+    <WagmiProvider config={wagmiConfig}>
+      <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
+        <CDPHooksProvider config={cdpConfig}>
+          <ThemeProvider>
+            <CDPApp />
+          </ThemeProvider>
+        </CDPHooksProvider>
+      </PersistQueryClientProvider>
+    </WagmiProvider>
   );
 }
