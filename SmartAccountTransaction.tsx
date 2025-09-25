@@ -10,13 +10,7 @@ import {
   ActivityIndicator,
   Linking,
 } from "react-native";
-import {
-  createPublicClient,
-  http,
-  parseUnits,
-  encodeFunctionData,
-  formatUnits,
-} from "viem";
+import { createPublicClient, http, parseUnits, encodeFunctionData, formatUnits } from "viem";
 import { baseSepolia } from "viem/chains";
 import { useTheme } from "./theme/ThemeContext";
 
@@ -80,13 +74,16 @@ function SmartAccountTransaction(props: Props) {
   }, [usdcBalance]);
 
   const getBalance = useCallback(async () => {
+    console.log("getBalance", smartAccount);
     if (!smartAccount) return;
 
     try {
+      console.log("Getting balance");
       // Get ETH balance
       const ethBalance = await client.getBalance({
         address: smartAccount,
       });
+      console.log("ETH balance", ethBalance);
       setBalance(ethBalance);
 
       // Get USDC balance
@@ -143,13 +140,9 @@ function SmartAccountTransaction(props: Props) {
         getBalance();
       }
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Failed to send user operation";
+      const message = err instanceof Error ? err.message : "Failed to send user operation";
       setErrorMessage(message);
-      Alert.alert(
-        "Transaction Failed",
-        message + (message.endsWith(".") ? "" : ".")
-      );
+      Alert.alert("Transaction Failed", message + (message.endsWith(".") ? "" : "."));
     }
   };
 
@@ -186,7 +179,7 @@ function SmartAccountTransaction(props: Props) {
           style: "cancel",
         },
       ],
-      { cancelable: true }
+      { cancelable: true },
     );
   };
 
@@ -365,9 +358,7 @@ function SmartAccountTransaction(props: Props) {
       <View style={styles.balanceSection}>
         <Text style={styles.balanceTitle}>Current Balance</Text>
         <Text style={styles.balanceAmount}>
-          {formattedUsdcBalance === undefined
-            ? "Loading..."
-            : `${formattedUsdcBalance} USDC`}
+          {formattedUsdcBalance === undefined ? "Loading..." : `${formattedUsdcBalance} USDC`}
         </Text>
         {!hasUsdcBalance && (
           <TouchableOpacity style={styles.faucetButton} onPress={openFaucet}>
@@ -393,8 +384,8 @@ function SmartAccountTransaction(props: Props) {
             <View style={styles.noteTextContainer}>
               <Text style={styles.noteTitle}>Note:</Text>
               <Text style={styles.noteText}>
-                Even though this is a gasless transaction, you still need USDC
-                in your account to send it. Get some from the{" "}
+                Even though this is a gasless transaction, you still need USDC in your account to
+                send it. Get some from the{" "}
                 <Text style={styles.faucetLink} onPress={openFaucet}>
                   CDP Faucet
                 </Text>
@@ -407,8 +398,7 @@ function SmartAccountTransaction(props: Props) {
         <TouchableOpacity
           style={[
             styles.sendButton,
-            (!smartAccount || isLoading || !hasUsdcBalance) &&
-              styles.sendButtonDisabled,
+            (!smartAccount || isLoading || !hasUsdcBalance) && styles.sendButtonDisabled,
           ]}
           onPress={handleSendUserOperation}
           disabled={!smartAccount || isLoading || !hasUsdcBalance}
@@ -422,9 +412,7 @@ function SmartAccountTransaction(props: Props) {
 
         {errorMessage || error ? (
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>
-              {errorMessage || error?.message}
-            </Text>
+            <Text style={styles.errorText}>{errorMessage || error?.message}</Text>
           </View>
         ) : null}
 
@@ -439,14 +427,12 @@ function SmartAccountTransaction(props: Props) {
                 onPress={() =>
                   copyToClipboard(
                     `https://sepolia.basescan.org/tx/${data.transactionHash}`,
-                    "Block Explorer Link"
+                    "Block Explorer Link",
                   )
                 }
               >
                 <Text style={styles.hashText}>{data.transactionHash}</Text>
-                <Text style={styles.copyHint}>
-                  Tap to copy block explorer link
-                </Text>
+                <Text style={styles.copyHint}>Tap to copy block explorer link</Text>
               </TouchableOpacity>
             </View>
           </View>

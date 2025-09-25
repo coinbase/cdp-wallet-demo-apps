@@ -38,3 +38,6 @@ yarn-error.*
 
 # IDE
 .idea
+
+ios/
+android/

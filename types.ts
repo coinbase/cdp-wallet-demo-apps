@@ -19,7 +19,6 @@ export interface ThemeContextType {
 
 export type AuthMethod = "email" | "sms";
 
-
 export interface DarkModeToggleProps {
   style?: any;
   iconStyle?: any;
