@@ -89,7 +89,7 @@ export default function AuthSection({ user }: AuthSectionProps) {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="button"
                 style={{ marginRight: "0.5em", width: "200px" }}
@@ -109,7 +109,7 @@ export default function AuthSection({ user }: AuthSectionProps) {
               <input
                 type="text"
                 value={otp}
-                onChange={(e) => setOtp(e.target.value)}
+                onChange={e => setOtp(e.target.value)}
                 placeholder="Enter OTP code"
                 className="button"
                 style={{ marginRight: "0.5em", width: "150px" }}
@@ -139,8 +139,8 @@ export default function AuthSection({ user }: AuthSectionProps) {
           {error && <div className="error">{error}</div>}
 
           <div style={{ marginTop: "1em", fontSize: "0.9em", opacity: 0.7 }}>
-            <strong>Note:</strong> This standalone example uses CDP core API directly,
-            without hooks or providers. Authentication is handled via email OTP.
+            <strong>Note:</strong> This standalone example uses CDP core API directly, without hooks
+            or providers. Authentication is handled via email OTP.
           </div>
         </div>
       ) : (
@@ -148,11 +148,7 @@ export default function AuthSection({ user }: AuthSectionProps) {
           <div className="status connected">
             ✅ Signed in as: {user.solanaAccounts?.[0] || user.userId}
           </div>
-          <button
-            className="button secondary"
-            onClick={handleSignOut}
-            disabled={isLoading}
-          >
+          <button className="button secondary" onClick={handleSignOut} disabled={isLoading}>
             {isLoading ? "Signing out..." : "Sign Out"}
           </button>
           {error && <div className="error">{error}</div>}

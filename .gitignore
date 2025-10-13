@@ -41,3 +41,6 @@ yarn-error.*
 
 ios/
 android/
+
+# AI
+.claude

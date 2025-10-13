@@ -17,7 +17,7 @@ const config = {
   },
 };
 
-(globalThis as any).Buffer = Buffer;
+(globalThis as typeof globalThis & { Buffer: typeof Buffer }).Buffer = Buffer;
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

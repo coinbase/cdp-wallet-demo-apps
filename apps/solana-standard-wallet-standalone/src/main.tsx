@@ -5,7 +5,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
-(globalThis as any).Buffer = Buffer;
+(globalThis as typeof globalThis & { Buffer: typeof Buffer }).Buffer = Buffer;
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

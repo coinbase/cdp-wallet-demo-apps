@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { User, getCurrentUser, onAuthStateChange } from "@coinbase/cdp-core";
-import { useCdpSolanaStandardWallet, useSolanaStandardWallets } from "@coinbase/cdp-solana-standard-wallet";
+import {
+  useCdpSolanaStandardWallet,
+  useSolanaStandardWallets,
+} from "@coinbase/cdp-solana-standard-wallet";
 
 import AuthSection from "./components/AuthSection";
 import SigningSection from "./components/SigningSection";
@@ -41,7 +44,7 @@ function App() {
         setUser(currentUser);
 
         // Set up auth state change listener
-        onAuthStateChange((user) => {
+        onAuthStateChange(user => {
           setUser(user);
         });
       } catch (error) {
@@ -61,8 +64,8 @@ function App() {
       <header>
         <h1>Solana Wallet Standard Standalone Example</h1>
         <p>
-          This example demonstrates Solana wallet integration using the Wallet Standard
-          with CDP core API directly (no hooks, no providers).
+          This example demonstrates Solana wallet integration using the Wallet Standard with CDP
+          core API directly (no hooks, no providers).
         </p>
       </header>
 

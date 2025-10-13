@@ -20,17 +20,20 @@ This example demonstrates the CDP Standard Solana Wallet integration with the Wa
 ## Setup
 
 1. **Install dependencies**:
+
    ```bash
    pnpm install
    ```
 
 2. **Configure environment variables**:
+
    ```bash
    cp .env.example .env
    # Edit .env and set your CDP API key name
    ```
 
 3. **Start the development server**:
+
    ```bash
    pnpm dev
    ```
@@ -55,6 +58,7 @@ This example demonstrates the CDP Standard Solana Wallet integration with the Wa
 ## Architecture
 
 This example shows how to:
+
 - Integrate CDP embedded wallets with React applications
 - Use the wallet standard to make CDP wallets discoverable
 - Implement signing workflows compatible with existing Solana dApps
@@ -63,6 +67,7 @@ This example shows how to:
 ## Development
 
 The example is built with:
+
 - **React 18** for the UI
 - **TypeScript** for type safety
 - **Vite** for fast development

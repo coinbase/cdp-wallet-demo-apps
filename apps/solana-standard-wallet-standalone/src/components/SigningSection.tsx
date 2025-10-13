@@ -6,6 +6,37 @@ interface SigningSectionProps {
   wallet: Wallet;
 }
 
+interface SignMessageFeature {
+  signMessage: (options: {
+    account: { address: string };
+    message: Uint8Array;
+  }) => Promise<Array<{ signature: Uint8Array }>>;
+}
+
+interface SignTransactionFeature {
+  signTransaction: (options: {
+    account: { address: string };
+    transaction: Uint8Array;
+    chain: string;
+  }) => Promise<Array<{ signedTransaction: Uint8Array }>>;
+}
+
+interface SignAndSendTransactionFeature {
+  signAndSendTransaction: (options: {
+    account: { address: string };
+    transaction: Uint8Array;
+    chain: string;
+  }) => Promise<Array<{ signature: Uint8Array }>>;
+}
+
+interface ConnectFeature {
+  connect: () => Promise<{ accounts: unknown[] }>;
+}
+
+interface DisconnectFeature {
+  disconnect: () => Promise<void>;
+}
+
 /**
  * Signing operations component that demonstrates wallet signing capabilities.
  *
@@ -38,7 +69,9 @@ export default function SigningSection({ wallet }: SigningSectionProps) {
       const message = new TextEncoder().encode("Hello from Solana Wallet Standard!");
 
       if ("solana:signMessage" in wallet.features) {
-        const result = await (wallet.features["solana:signMessage"] as any).signMessage({
+        const result = await (
+          wallet.features["solana:signMessage"] as SignMessageFeature
+        ).signMessage({
           account,
           message,
         });
@@ -74,7 +107,9 @@ export default function SigningSection({ wallet }: SigningSectionProps) {
       );
 
       if ("solana:signTransaction" in wallet.features) {
-        const result = await (wallet.features["solana:signTransaction"] as any).signTransaction({
+        const result = await (
+          wallet.features["solana:signTransaction"] as SignTransactionFeature
+        ).signTransaction({
           account,
           transaction: serializedTransaction,
           chain: "solana:devnet",
@@ -115,7 +150,9 @@ export default function SigningSection({ wallet }: SigningSectionProps) {
       );
 
       if ("solana:signAndSendTransaction" in wallet.features) {
-        const result = await (wallet.features["solana:signAndSendTransaction"] as any).signAndSendTransaction({
+        const result = await (
+          wallet.features["solana:signAndSendTransaction"] as SignAndSendTransactionFeature
+        ).signAndSendTransaction({
           account,
           transaction: serializedTransaction,
           chain: "solana:devnet",
@@ -143,7 +180,7 @@ export default function SigningSection({ wallet }: SigningSectionProps) {
 
     try {
       if ("standard:connect" in wallet.features) {
-        const result = await (wallet.features["standard:connect"] as any).connect();
+        const result = await (wallet.features["standard:connect"] as ConnectFeature).connect();
         setMessageResult(`Connected! Found ${result.accounts.length} accounts`);
       } else {
         throw new Error("Wallet does not support connect feature");
@@ -161,7 +198,7 @@ export default function SigningSection({ wallet }: SigningSectionProps) {
 
     try {
       if ("standard:disconnect" in wallet.features) {
-        await (wallet.features["standard:disconnect"] as any).disconnect();
+        await (wallet.features["standard:disconnect"] as DisconnectFeature).disconnect();
         setMessageResult("Wallet disconnected!");
       } else {
         throw new Error("Wallet does not support disconnect feature");

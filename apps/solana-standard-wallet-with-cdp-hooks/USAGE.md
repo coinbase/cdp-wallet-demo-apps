@@ -3,17 +3,20 @@
 ## 🚀 Quick Start
 
 1. **Set up environment**:
+
    ```bash
    cp .env.example .env
    # Edit .env and set your CDP project ID
    ```
 
 2. **Install dependencies**:
+
    ```bash
    pnpm install
    ```
 
 3. **Start the development server**:
+
    ```bash
    pnpm dev
    ```
@@ -23,11 +26,13 @@
 ## 📱 How to Use the Example
 
 ### Step 1: Authentication
+
 - Click "Sign In with CDP" to authenticate with your CDP account
 - You'll go through the email/SMS verification process
 - Once authenticated, you'll see your user information
 
 ### Step 2: Wallet Overview
+
 - The **CDP Wallet Section** shows your embedded Solana wallet details
 - You'll see:
   - Wallet name, version, and supported chains
@@ -35,12 +40,14 @@
   - Supported wallet standard features
 
 ### Step 3: Test Signing Operations
+
 - **Sign Message**: Signs a "Hello" message with your wallet
 - **Sign Transaction**: Creates and signs a test Solana transfer transaction
 - **Sign & Send Transaction**: Creates, signs, and submits a transaction to Solana devnet
 - **Connect/Disconnect**: Test wallet standard connection flow
 
 ### Step 4: Wallet Standard Integration
+
 - The **Wallet Standard Section** shows all wallets detected through the standard
 - You'll see your CDP wallet listed alongside any other installed wallets
 - The integration test verifies all components are working correctly
@@ -48,53 +55,52 @@
 ## 🔍 What You'll Learn
 
 ### CDP Standard Solana Wallet Hook
+
 ```tsx
-import { useCdpSolanaStandardWallet } from '@coinbase/cdp-solana-standard-wallet'
+import { useCdpSolanaStandardWallet } from "@coinbase/cdp-solana-standard-wallet";
 
 function MyComponent() {
-  const { ready, wallet } = useCdpSolanaStandardWallet()
+  const { ready, wallet } = useCdpSolanaStandardWallet();
 
   if (ready && wallet) {
     // Use the wallet for signing operations
-    const result = await wallet.features['solana:signMessage'].signMessage({
+    const result = await wallet.features["solana:signMessage"].signMessage({
       account: wallet.accounts[0],
-      message: new TextEncoder().encode('Hello!')
-    })
+      message: new TextEncoder().encode("Hello!"),
+    });
   }
 }
 ```
 
 ### Wallet Standard Discovery
+
 ```tsx
-import { useSolanaStandardWallets } from '@coinbase/cdp-solana-standard-wallet'
+import { useSolanaStandardWallets } from "@coinbase/cdp-solana-standard-wallet";
 
 function WalletList() {
-  const { wallets } = useSolanaStandardWallets()
+  const { wallets } = useSolanaStandardWallets();
 
   return (
     <div>
       {wallets.map(wallet => (
         <div key={wallet.name}>
-          {wallet.name} {wallet.features['cdp:'] ? '(CDP)' : ''}
+          {wallet.name} {wallet.features["cdp:"] ? "(CDP)" : ""}
         </div>
       ))}
     </div>
-  )
+  );
 }
 ```
 
 ### Authentication State
+
 ```tsx
-import { useCurrentUser } from '@coinbase/cdp-hooks'
+import { useCurrentUser } from "@coinbase/cdp-hooks";
 
 function AuthStatus() {
-  const { currentUser } = useCurrentUser()
+  const { currentUser } = useCurrentUser();
 
-  return (
-    <div>
-      {currentUser ? `Signed in as ${currentUser.username}` : 'Not signed in'}
-    </div>
-  )
+  return <div>{currentUser ? `Signed in as ${currentUser.username}` : "Not signed in"}</div>;
 }
 ```
 

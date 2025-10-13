@@ -32,6 +32,7 @@ This example demonstrates Solana wallet integration using the Wallet Standard wi
 ## Setup
 
 1. **Install dependencies**:
+
    ```bash
    npm install
    # or
@@ -39,6 +40,7 @@ This example demonstrates Solana wallet integration using the Wallet Standard wi
    ```
 
 2. **Start the development server**:
+
    ```bash
    npm run dev
    # or
@@ -64,6 +66,7 @@ This example demonstrates Solana wallet integration using the Wallet Standard wi
 ## Architecture
 
 This standalone example:
+
 - Uses the Wallet Standard API directly via `@wallet-standard/base`
 - Implements wallet detection and registration listeners
 - Provides a simple React interface for wallet interaction
@@ -101,6 +104,7 @@ This standalone example:
 ## Compatible Wallets
 
 This example works with any wallet that implements the Wallet Standard, including:
+
 - Phantom
 - Solflare
 - Backpack
@@ -111,6 +115,7 @@ This example works with any wallet that implements the Wallet Standard, includin
 ## Extending the Example
 
 You can extend this example by:
+
 - Adding support for additional Solana features (token transfers, NFT operations)
 - Implementing custom transaction types
 - Adding mainnet support (update RPC endpoints)

@@ -11,5 +11,5 @@ interface ImportMeta {
 }
 
 declare global {
-  var Buffer: typeof import('buffer').Buffer;
+  var Buffer: typeof import("buffer").Buffer;
 }
