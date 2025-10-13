@@ -25,7 +25,7 @@ function App() {
     basePath: import.meta.env.VITE_CDP_BASE_PATH,
     useMock: import.meta.env.VITE_USE_MOCK === "true",
     solana: {
-      createOnLogin: true,
+      createOnLogin: import.meta.env.VITE_CDP_CREATE_SOLANA_ACCOUNT === "true",
     },
   };
 
