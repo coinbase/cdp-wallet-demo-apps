@@ -1,59 +1,19 @@
-# React Native Expo Example
+# CDP Wallet Demo Apps
 
-A React Native Expo example demonstrating CDP Embedded Wallet SDK integration with React Native hooks. This app was generated via `pnpm create @coinbase/cdp-app@latest`. See the [CDP React Native Quickstart](https://docs.cdp.coinbase.com/embedded-wallets/react-native/quickstart) for more details.
+This repository contains demo apps showcasing various CDP project setups and usecases.
 
-<p align="center">
-   <video src="https://github.com/user-attachments/assets/c2d3b37a-e358-4113-a11f-b90491fb5b74" />
-</p>
+## Getting Started
 
-## Prerequisites
-
-You will need Node.js v20 or higher and pnpm installed on your machine.
-
-This project uses development builds via Expo's [Continuous Native Generation](https://docs.expo.dev/workflow/continuous-native-generation/) feature. To learn how to set up your environment, check out Expo's [environment setup guide](https://docs.expo.dev/get-started/set-up-your-environment/?mode=development-build&buildEnv=local).
-
-> [!NOTE]
->
-> The link to the environment setup guide is pre-filled with the correct mode ("Development build") and build environment (disabled "Build with Expo Application Services (EAS)"). Feel free to change the device type / platform but make sure to keep the mode and build environment as-is.
-
-## Setting up the app
-
-1. Install dependencies:
-
-   ```bash
-   pnpm install
-   ```
-
-2. Copy environment variables:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-3. Fetch your Proejct ID from [CDP Portal](https://portal.cdp.coinbase.com/) and update `EXPO_PUBLIC_CDP_PROJECT_ID` in `.env`.
-
-   ```bash
-   EXPO_PUBLIC_CDP_PROJECT_ID='your-project-id-here'
-   ```
-
-## Running the App
-
-**iOS:**
+To get started, clone the repository and install the dependencies:
 
 ```bash
-# Run on device
-pnpm run ios --device
-
-# Or run on simulator
-pnpm run ios
+git clone https://github.com/coinbase/cdp-wallet-demo-apps.git
+cd cdp-wallet-demo-apps
+pnpm install
 ```
 
-**Android:**
+To run an app, navigate to the folder of the app you want to run and follow the instructions in the corresponding README.md file.
 
-```bash
-# Run on device
-pnpm run android --device
+## Apps
 
-# Or run on emulator
-pnpm run android
-```
+- [React Native Expo](apps/react-native-expo)
