@@ -37,13 +37,26 @@ This example demonstrates Solana wallet integration using the Wallet Standard wi
 pnpm install
 ```
 
-2. **Start the development server**:
+2. **Set up environment**:
+
+```bash
+cp .env.example .env
+# Edit .env and set your CDP project ID
+```
+
+3. Fetch your Project ID from [CDP Portal](https://portal.cdp.coinbase.com/) and update `VITE_CDP_PROJECT_ID` in `.env`
+
+```bash
+VITE_CDP_PROJECT_ID='your-project-id-here'
+```
+
+4. **Start the development server**:
 
 ```bash
 pnpm dev
 ```
 
-3. **Open in browser**: Navigate to `http://localhost:3000`
+5. **Open in browser**: Navigate to `http://localhost:3000`
 
 ## Usage Flow
 

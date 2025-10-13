@@ -19,26 +19,32 @@ This example demonstrates the CDP Standard Solana Wallet integration with the Wa
 
 ## 🚀 Quick Start
 
-1. **Set up environment**:
+1. **Install dependencies**:
 
-   ```bash
-   cp .env.example .env
-   # Edit .env and set your CDP project ID
-   ```
+```bash
+pnpm install
+```
 
-2. **Install dependencies**:
+2. **Set up environment**:
 
-   ```bash
-   pnpm install
-   ```
+```bash
+cp .env.example .env
+# Edit .env and set your CDP project ID
+```
 
-3. **Start the development server**:
+3. Fetch your Project ID from [CDP Portal](https://portal.cdp.coinbase.com/) and update `VITE_CDP_PROJECT_ID` in `.env`.
 
-   ```bash
-   pnpm dev
-   ```
+```bash
+VITE_CDP_PROJECT_ID='your-project-id-here'
+```
 
-4. **Open your browser**: Navigate to `http://localhost:3000`
+4. **Start the development server**:
+
+```bash
+pnpm dev
+```
+
+5. **Open your browser**: Navigate to `http://localhost:3000`
 
 ## 📱 How to Use the Example
 
