@@ -2,8 +2,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_CDP_PROJECT_ID: string;
-  readonly VITE_CDP_BASE_PATH?: string;
-  readonly VITE_USE_MOCK?: string;
+  readonly VITE_CDP_CREATE_SOLANA_ACCOUNT?: string;
 }
 
 interface ImportMeta {

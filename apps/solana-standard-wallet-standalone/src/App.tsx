@@ -22,8 +22,6 @@ function App() {
   // CDP configuration
   const config = {
     projectId: import.meta.env.VITE_CDP_PROJECT_ID,
-    basePath: import.meta.env.VITE_CDP_BASE_PATH,
-    useMock: import.meta.env.VITE_USE_MOCK === "true",
     solana: {
       createOnLogin: import.meta.env.VITE_CDP_CREATE_SOLANA_ACCOUNT === "true",
     },

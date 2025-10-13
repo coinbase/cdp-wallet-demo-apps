@@ -33,19 +33,15 @@ This example demonstrates Solana wallet integration using the Wallet Standard wi
 
 1. **Install dependencies**:
 
-   ```bash
-   npm install
-   # or
-   pnpm install
-   ```
+```bash
+pnpm install
+```
 
 2. **Start the development server**:
 
-   ```bash
-   npm run dev
-   # or
-   pnpm dev
-   ```
+```bash
+pnpm dev
+```
 
 3. **Open in browser**: Navigate to `http://localhost:3000`
 
