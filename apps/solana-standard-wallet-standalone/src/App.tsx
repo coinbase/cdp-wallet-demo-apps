@@ -62,7 +62,7 @@ function App() {
   return (
     <div>
       <header>
-        <h1>Solana Wallet Standard Standalone Example</h1>
+        <h1>Solana Standard Wallet - Standalone Example</h1>
         <p>
           This example demonstrates Solana wallet integration using the Wallet Standard with CDP
           core API directly (no hooks, no providers).

@@ -66,7 +66,7 @@ export default function SigningSection({ wallet }: SigningSectionProps) {
 
     try {
       const account = wallet.accounts[0];
-      const message = new TextEncoder().encode("Hello from Solana Wallet Standard!");
+      const message = new TextEncoder().encode("Hello from Solana Standard Wallet!");
 
       if ("solana:signMessage" in wallet.features) {
         const result = await (
