@@ -8,7 +8,9 @@
     "pnpm": ">=9.0.0"
   },
   "scripts": {
-    "format": "pnpm -r format"
+    "format": "pnpm -r format",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix"
   },
   "devDependencies": {
     "prettier": "^3.6.2"
