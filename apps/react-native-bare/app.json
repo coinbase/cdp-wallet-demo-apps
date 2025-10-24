@@ -1,0 +1,5 @@
+{
+  "name": "react-native-bare",
+  "displayName": "React Native Bare",
+  "plugins": ["expo-secure-store"]
+}
