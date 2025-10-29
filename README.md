@@ -17,5 +17,8 @@ To run an app, navigate to the folder of the app you want to run and follow the 
 ## Apps
 
 - [React Native Expo](apps/react-native-expo)
+- [React Native Bare](apps/react-native-bare)
+- [React Native Expo Wagmi](apps/react-native-expo-wagmi)
+- [React Wagmi](apps/react-wagmi)
 - [Solana Standard Wallet - With CDP Hooks](apps/solana-standard-wallet-with-cdp-hooks)
 - [Solana Standard Wallet - Standalone](apps/solana-standard-wallet-standalone)
