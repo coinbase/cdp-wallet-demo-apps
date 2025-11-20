@@ -1,0 +1,319 @@
+.app-container {
+  max-width: 1400px;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #646cff 0%, #61dafb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: #888;
+  font-size: 0.95rem;
+  margin-top: 0;
+}
+
+.card {
+  padding: 2rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  flex: 1;
+}
+
+.auth-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.auth-section-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.auth-section p {
+  margin: 0;
+  color: #888;
+}
+
+.tab-navigation {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+}
+
+.tab-button:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-button.active {
+  color: #ffffff;
+  background: rgba(97, 218, 251, 0.15);
+  border-bottom: 3px solid #61dafb;
+}
+
+.tab-content {
+  width: 100%;
+  margin-top: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-section button {
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.auth-section-header button {
+  margin-top: 0;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+.auth-section button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.4);
+}
+
+.auth-section button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cdp-auth-button {
+  margin-top: 1.5rem !important;
+  background: #61dafb !important;
+}
+
+.cdp-auth-button:hover:not(:disabled) {
+  background: #4fc3f7 !important;
+}
+
+.error-message {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  border-radius: 8px;
+  color: #ff6b6b;
+}
+
+.actions-section {
+  margin-top: 2rem;
+  padding: 2rem 0;
+}
+
+.actions-section h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #61dafb;
+  font-size: 1.25rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.action-button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: #646cff;
+  color: white;
+  cursor: pointer;
+  transition: all 0.25s;
+  flex: 1;
+  min-width: 200px;
+}
+
+.action-button:hover:not(:disabled) {
+  background: #535bf2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.4);
+}
+
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.success-message {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  border-radius: 8px;
+  color: #4ade80;
+  word-break: break-all;
+}
+
+.details-grid {
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.details-grid > .user-details {
+  flex: 1;
+  min-width: 300px;
+}
+
+.user-details {
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.user-details.token-display {
+  margin-top: 1.5rem;
+}
+
+.user-details h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #61dafb;
+  font-size: 1.25rem;
+}
+
+.user-details pre {
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0.5rem;
+  max-width: 100%;
+}
+
+.token-text {
+  word-break: break-all;
+  white-space: pre-wrap;
+  font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+
+  .details-grid {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .user-details {
+    padding: 1.5rem;
+    min-width: 0;
+  }
+
+  .user-details pre {
+    font-size: 0.8rem;
+    overflow-x: auto;
+  }
+
+  .user-details h3 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .user-details {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .user-details h3 {
+    color: #646cff;
+  }
+
+  .user-details pre {
+    color: #213547;
+  }
+
+  .tab-navigation {
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .tab-button {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .tab-button:hover {
+    color: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .tab-button.active {
+    color: #213547;
+    background: rgba(100, 108, 255, 0.1);
+    border-bottom-color: #646cff;
+  }
+
+  .error-message {
+    background: rgba(255, 0, 0, 0.05);
+    color: #d32f2f;
+  }
+}
