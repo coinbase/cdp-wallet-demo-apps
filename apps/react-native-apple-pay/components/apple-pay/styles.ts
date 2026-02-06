@@ -236,10 +236,6 @@ export const createStyles = (colors: ThemeColors) =>
       justifyContent: "space-between",
       paddingVertical: 16,
       marginBottom: 16,
-      borderTopWidth: 1,
-      borderTopColor: colors.border,
-      borderBottomWidth: 1,
-      borderBottomColor: colors.border,
     },
     toggleLabelContainer: {
       flex: 1,
