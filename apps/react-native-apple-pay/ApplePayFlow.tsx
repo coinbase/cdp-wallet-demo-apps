@@ -23,6 +23,7 @@ export function ApplePayFlow({ onDone }: ApplePayFlowProps) {
   const { colors } = useTheme();
 
   const [amount, setAmount] = useState("");
+  const [isSandbox, setIsSandbox] = useState(true);
 
   const handleCreateOrder = useCallback(async () => {
     const parsedAmount = parseFloat(amount);
@@ -34,9 +35,9 @@ export function ApplePayFlow({ onDone }: ApplePayFlowProps) {
       destination: { address: evmAddress, network: "base" },
       purchase: { amount, currency: "usdc" },
       payment: { currency: "usd" },
-      isSandbox: true,
+      isSandbox,
     });
-  }, [amount, createOrder, evmAddress]);
+  }, [amount, createOrder, evmAddress, isSandbox]);
 
   const handleDone = useCallback(() => {
     reset();
@@ -90,6 +91,8 @@ export function ApplePayFlow({ onDone }: ApplePayFlowProps) {
       onAmountChange={setAmount}
       onSubmit={handleCreateOrder}
       isCreatingOrder={status === "pending"}
+      isSandbox={isSandbox}
+      onSandboxChange={setIsSandbox}
     />
   );
 }

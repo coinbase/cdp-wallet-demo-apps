@@ -230,4 +230,29 @@ export const createStyles = (colors: ThemeColors) =>
       color: colors.accent,
       textDecorationLine: "underline",
     },
+    toggleRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      paddingVertical: 16,
+      marginBottom: 16,
+      borderTopWidth: 1,
+      borderTopColor: colors.border,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.border,
+    },
+    toggleLabelContainer: {
+      flex: 1,
+      marginRight: 16,
+    },
+    toggleLabel: {
+      fontSize: 16,
+      fontWeight: "500",
+      color: colors.text,
+    },
+    toggleHint: {
+      fontSize: 12,
+      color: colors.textSecondary,
+      marginTop: 4,
+    },
   });

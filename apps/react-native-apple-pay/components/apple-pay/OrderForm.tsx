@@ -1,19 +1,20 @@
 import { useEvmAddress } from "@coinbase/cdp-hooks";
 import React from "react";
-import { Linking, Text, TextInput, View } from "react-native";
+import { Linking, Text, TextInput, View, Switch } from "react-native";
 
 import { useTheme } from "../../theme/ThemeContext";
 import { InfoRow } from "./InfoRow";
 import { PrimaryButton } from "./PrimaryButton";
 import { ScreenContainer } from "./ScreenContainer";
 import { createStyles } from "./styles";
-import { ThemeColors } from "../../types";
 
 interface OrderFormProps {
   amount: string;
   onAmountChange: (amount: string) => void;
   onSubmit: () => void;
   isCreatingOrder: boolean;
+  isSandbox: boolean;
+  onSandboxChange: (value: boolean) => void;
 }
 
 function formatAddress(address: string | null | undefined): string {
@@ -21,7 +22,14 @@ function formatAddress(address: string | null | undefined): string {
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
 }
 
-export function OrderForm({ amount, onAmountChange, onSubmit, isCreatingOrder }: OrderFormProps) {
+export function OrderForm({
+  amount,
+  onAmountChange,
+  onSubmit,
+  isCreatingOrder,
+  isSandbox,
+  onSandboxChange,
+}: OrderFormProps) {
   const { evmAddress } = useEvmAddress();
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -54,6 +62,22 @@ export function OrderForm({ amount, onAmountChange, onSubmit, isCreatingOrder }:
           <InfoRow label="Network:" value="Base" />
           <InfoRow label="You'll receive:" value="USDC" />
           <InfoRow label="To wallet:" value={formatAddress(evmAddress)} />
+        </View>
+
+        <View style={styles.toggleRow}>
+          <View style={styles.toggleLabelContainer}>
+            <Text style={styles.toggleLabel}>Sandbox Mode</Text>
+            <Text style={styles.toggleHint}>
+              {isSandbox ? "Test purchase (no real money)" : "Real purchase"}
+            </Text>
+          </View>
+          <Switch
+            value={isSandbox}
+            onValueChange={onSandboxChange}
+            trackColor={{ false: colors.border, true: colors.accent }}
+            thumbColor="#ffffff"
+            disabled={isCreatingOrder}
+          />
         </View>
 
         <PrimaryButton
