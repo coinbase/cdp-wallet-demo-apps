@@ -1,3 +1,8 @@
+if (__DEV__) {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  require("./ReactotronConfig");
+}
+
 import structuredClone from "@ungap/structured-clone";
 import { registerRootComponent } from "expo";
 import { install } from "react-native-quick-crypto";
