@@ -9,7 +9,8 @@ import {
   PublicKey,
   Transaction,
   SystemProgram,
-  SYSVAR_RECENT_BLOCKHASHES_PUBKEY,
+  Connection, 
+  clusterApiUrl,
 } from "@solana/web3.js";
 import { useState } from "react";
 
@@ -33,7 +34,7 @@ export const SolanaWalletActions = ({ solanaAccount }: SolanaWalletActionsProps)
   const [signResult, setSignResult] = useState<string | null>(null);
   const [transactionSignature, setTransactionSignature] = useState<string | null>(null);
 
-  const createTransaction = (address: string): string => {
+  const createTransaction = async (address: string): Promise<string> => {
     const fromPubkey = new PublicKey(address);
     const toPubkey = new PublicKey(address); // Send to self for testing
 
@@ -45,7 +46,11 @@ export const SolanaWalletActions = ({ solanaAccount }: SolanaWalletActionsProps)
       }),
     );
 
-    transaction.recentBlockhash = SYSVAR_RECENT_BLOCKHASHES_PUBKEY.toBase58();
+    const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+    
+    const { blockhash } = await connection.getLatestBlockhash();
+    transaction.recentBlockhash = blockhash;
+    
     transaction.feePayer = fromPubkey;
 
     const serializedTransaction = transaction.serialize({
@@ -84,7 +89,7 @@ export const SolanaWalletActions = ({ solanaAccount }: SolanaWalletActionsProps)
     setTransactionSignature(null);
 
     try {
-      const transaction = createTransaction(solanaAccount);
+      const transaction = await createTransaction(solanaAccount);
       const result = await signSolanaTransaction({
         solanaAccount,
         transaction,
