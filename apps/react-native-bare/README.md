@@ -111,6 +111,6 @@ npm run ios
 
 10. Copied ALL starter code from [CDP React Native Starter](https://github.com/coinbase/demo-react-native-expo).
 
-11. Filled in CDP project id in `App.tsx` (replace `REPLACE_ME` with the project id).
+11. Ensure CDP_PROJECT_ID is set in your `.env` file (see step 3).
 
 12. At this point the project should build and run, and the user should be able to sign in with email or SMS.
